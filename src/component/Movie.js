@@ -1,17 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 function Movie() {
-const {movieId} = useParams();
+  const {movieId} = useParams();
 
-const url=`https://imdb-api.com/en/API/Title/k_5u2bun1l/${movieId}`
 
-const url1 = `https://imdb-api.com/en/API/Trailer/k_5u2bun1l/${movieId}`
 
-const [data, setData] = useState();
+const url=`https://imdb-api.com/en/API/Title/k_51uur76b/${movieId}`
 
-const [trailer, setTrailer] = useState();
+const url1 =`https://imdb-api.com/en/API/Trailer/k_51uur76b/${movieId}`
+const [data , setData] = useState();
+
+const [trailer , setTrailer] = useState();
 
 useEffect(() => {
   async function fun1() {
@@ -33,16 +34,15 @@ useEffect(() => {
 
 }, [url1])
 
-
   return (
     <div>
       <div className='coverImg'>
-        <img src={trailer?.thumbnailUrl} alt='cover' className='coverMainImg'/>
+        <img src={trailer?.thumbnailUrl} alt='cover' className='coverMainImg' />
       </div>
       <div className='movieBody'>
         <div className='movieContainer'>
           <div className='movieRating'>
-            <img src={data?.image} alt='displayPic'/>
+            <img src={data?.image} alt='displayPic' />
             <p>
               <span>{data?.imDbRating}</span>/10
             </p>
@@ -61,25 +61,27 @@ useEffect(() => {
           </div>
           <div className='castName'>
             {data?.actorList?.map((actor)=>(
-              <div>
-              <Link className='actorLink' to={`/actor/${actor.id}`}>
+            <div key = {actor.id}>
+              <Link 
+                className='actorLink' to={`/actor/${actor.id}`}>
                 <div className='castActors'>
                   <div className='castCircle'>
-                    <img src={actor.image} className='cardImg' />
+                    <img src={actor.image} className='cardImg' alt='' />
                   </div>
                   <div className='castActorName'>
-                    <h2>{actor.name}</h2>
-                    <p>{actor.asCharacter}</p>
-                  </div>
+                  </div><h2>actor name</h2>
+                  <p>actor.asCharacter</p>
                 </div>
               </Link>
             </div>
+
             ))}
             
+          
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
